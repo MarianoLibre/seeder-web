@@ -1,0 +1,22 @@
+{
+  "name": "seeder-web",
+  "version": "1.0.0",
+  "description": "Web tool for database seeding (melisprint)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarianoLibre/seeder-web.git"
+  },
+  "author": "https://github.com/MarianoLibre",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/MarianoLibre/seeder-web/issues"
+  },
+  "homepage": "https://github.com/MarianoLibre/seeder-web#readme",
+  "devDependencies": {
+    "parcel": "^2.8.0"
+  }
+}
