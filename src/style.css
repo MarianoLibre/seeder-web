@@ -1,0 +1,253 @@
+:root {
+  --blackest: #16181d;
+  --blacker: #21242c;
+  --black: #282C34;
+  --grey: #586074;
+  --white: #ABB2BF;
+  --whiter: #FFFFFF;
+  --red: #E06C75;
+  --green: #98C379;
+  --yellow: #E5C07B;
+  --blue: #61AFEF;
+  --magenta: #C678DD;
+  --cyan: #56B6C2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 100;
+}
+
+body {
+  background-color: #282c34;
+  color: #abb2bf;
+  font-family: sans-serif;
+  width: 100vw;
+  height: 100vh;
+}
+
+.blackfg {
+  color: var(--black);
+}
+.blackbg {
+  background-color: var(--black);
+}
+
+.whitefg {
+  color: var(--white);
+}
+.whitebg {
+  background-color: var(--white);
+}
+
+.redfg {
+  color: var(--red);
+}
+.redbg {
+  background-color: var(--red);
+}
+
+.bluefg {
+  color: var(--blue);
+}
+.bluebg {
+  background-color: var(--blue);
+}
+
+.yellowfg {
+  color: var(--yellow);
+}
+.yellowbg {
+  background-color: var(--yellow);
+}
+
+.greenfg {
+  color: var(--green);
+}
+.greenbg {
+  background-color: var(--green);
+}
+
+.magentafg {
+  color: var(--magenta);
+}
+.magentabg {
+  background-color: var(--magenta);
+}
+
+.cyanfg {
+  color: var(--cyan);
+}
+.cyanbg {
+  background-color: var(--cyan);
+}
+
+#colortest {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: display 500ms;
+}
+
+#ct_inner {
+  background-color: var(--black);
+  border: 1px solid var(--grey);
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px var(--blackest);
+}
+
+#ct_inner p {
+  padding: 10px;
+}
+
+.showBtn {
+  background-color: var(--black);
+  color: var(--grey);
+  border: 1px solid var(--grey);
+  padding: 10px;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  transition: all 400ms;
+  min-width: 100px;
+}
+.showBtn:hover {
+  filter: brightness(1.5);
+  color: var(--white);
+}
+
+#root {
+  height: calc(100vh - 60px);
+}
+
+#side-bar {
+  width: 240px;
+  height: 100%;
+  border-right: 1px solid var(--grey);
+  background-color: var(--blacker);
+  display: flex;
+  flex-direction: column;
+}
+
+#side-bar p {
+  width: 100%;
+  height: fit-content;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.9em;
+}
+#side-bar p i:first-of-type {
+  color: var(--grey);
+}
+#side-bar p:first-of-type {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--grey);
+  color: var(--white);
+  height: 60px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+#mysql {
+  color: var(--blue);
+}
+.fa-server {
+  margin-right: 10px;
+}
+.fa-folder-o {
+  margin-right: 20px;
+}
+
+header {
+  height: 60px;
+  padding: 0px 24px;
+  border-bottom: 1px solid var(--grey);
+  background-color: var(--blacker);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+header p:last-of-type span:first-child {
+  font-size: 14px;
+  color: var(--grey);
+}
+#status {
+  display: inline-block;
+  width: 120px;
+  border-radius: 5px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 10px;
+  transition: all 400ms;
+}
+.statusDown {
+  color: var(--whiter);
+  background-color: var(--red);
+}
+.statusUp {
+  color: var(--blacker);
+  background-color: var(--green);
+}
+.statusPre {
+  color: var(--whiter);
+  background-color: var(--blue);
+}
+#refresh {
+  margin-left: 10px;
+  color: var(--grey);
+  cursor: pointer;
+}
+.by {
+  background-color: var(--blackest);
+  border: 1px solid var(--grey);
+  border-radius: 10px;
+  height: 20px;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  from  {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.table {
+  color: var(--grey);
+  cursor: pointer;
+  transition: all 400ms;
+}
+.table:hover {
+  background-color: var(--black);
+  color: var(--white) !important;
+}
+.selected {
+  color: var(--white) !important;
+}

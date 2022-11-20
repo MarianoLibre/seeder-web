@@ -2,9 +2,11 @@
   "name": "seeder-web",
   "version": "1.0.0",
   "description": "Web tool for database seeding (melisprint)",
-  "main": "index.js",
+  "source": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel",
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/MarianoLibre/seeder-web#readme",
   "devDependencies": {
-    "parcel": "^2.8.0"
+    "parcel": "^2.8.0",
+    "serve": "^14.1.2"
   }
 }
