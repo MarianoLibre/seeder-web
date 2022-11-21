@@ -19,7 +19,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	_, err = sql.Open("mysql", "%s:%s@/%s?parseTime=true")
+	user := os.Getenv("USERNAME")
+	pass := os.Getenv("PASS")
+	dbName := os.Getenv("DATABASE")
+	dataSource := fmt.Sprintf("%s:%s@/%s?parseTime=true", user, pass, dbName)
+	db, err := sql.Open("mysql", dataSource)
 	if err != nil {
 		panic(err)
 	}
@@ -38,8 +42,6 @@ func main() {
 			MaxAge: 12 * time.Hour,
 		}))
 
-	user := os.Getenv("USERNAME")
-	pass := os.Getenv("PASS")
-	database := os.Getenv("DATABASE")
-	fmt.Printf("%s:%s@/%s?parseTime=true\n", user, pass, database)
+	router := NewRouter(engine, db)
+	router.engine.Run()
 }
