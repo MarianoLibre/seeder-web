@@ -47,9 +47,21 @@ func NewRouter(eng *gin.Engine, db *sql.DB) router {
 	r.engine.GET("", handler.SayHi())
 
 	// Routes
-	group := r.engine.Group("/seeder")
-	group.GET("/drop-tables", handler.Drop())
-	group.GET("/create-tables", handler.Create())
+	seeder := r.engine.Group("/seeder")
+	seeder.POST("/drop-tables", handler.Drop())
+	seeder.POST("/create-tables", handler.Create())
+	seeder.POST("/warehouses", handler.SeedWarehouses())
+	seeder.POST("/buyers", handler.SeedBuyers())
+	seeder.POST("/sellers", handler.SeedSellers())
+	seeder.POST("/employees", handler.SeedEmployees())
+	seeder.POST("/products", handler.SeedProducts())
+	seeder.POST("/sections", handler.SeedSections())
+	seeder.POST("/localities", handler.SeedLocalities())
+	seeder.POST("/carries", handler.SeedCarries())
+	seeder.POST("/product-records", handler.SeedProductRecords())
+	seeder.POST("/product-batches", handler.SeedProductBatches())
+	seeder.POST("/purchase-orders", handler.SeedPurchaseOrders())
+	seeder.POST("/inbound-orders", handler.SeedInboundOrders())
 
 	return r
 }

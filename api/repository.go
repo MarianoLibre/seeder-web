@@ -2,8 +2,10 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"io/ioutil"
 	"strings"
+	"syreclabs.com/go/faker"
 )
 
 type Repository interface {
@@ -58,7 +60,7 @@ const (
 		card_number_id,
 		first_name,
 		last_name,
-		purchase_order_count) VALUES (?, ?, ?, ?)`
+		purchase_orders_count) VALUES (?, ?, ?, ?)`
 	INSERT_SELLERS = `INSERT INTO sellers (
 		cid,
 		company_name,
@@ -163,11 +165,60 @@ func (r *repository) CreateTables() error {
 
 // Seeders
 func (r *repository) SeedWarehouses(n int) error {
+	codeGen := newCodeGen(3)
 
+	for i := 0; i < n; i++ {
+		stmt, err := r.db.Prepare(INSERT_WAREHOUSES)
+		if err != nil {
+			return err
+		}
+
+		res, err := stmt.Exec(
+			faker.Address().StreetAddress(),
+			faker.PhoneNumber().CellPhone(),
+			codeGen(),
+			faker.Number().NumberInt(2),
+			faker.Number().Between(-100, 32),
+		)
+
+		if err != nil {
+			return err
+		}
+
+		if ra, err := res.RowsAffected(); err != nil {
+			return err
+		} else if ra < 1 {
+			fmt.Println("[repository-seeder-warehouses] Oops! I fucked up!!!")
+		}
+
+	}
 	return nil
 }
 
 func (r *repository) SeedBuyers(n int) error {
+	for i := 0; i < n; i++ {
+		stmt, err := r.db.Prepare(INSERT_BUYERS)
+		if err != nil {
+			return err
+		}
+
+		res, err := stmt.Exec(
+			faker.Number().Between(20_000_000, 50_000_000),
+			faker.Name().FirstName(),
+			faker.Name().LastName(),
+			0,
+		)
+
+		if err != nil {
+			return err
+		}
+
+		if ra, err := res.RowsAffected(); err != nil {
+			return err
+		} else if ra < 1 {
+			fmt.Println("[repository-seeder-buyers] Oops! I fucked up!!!")
+		}
+	}
 
 	return nil
 }
@@ -220,4 +271,29 @@ func (r *repository) SeedInboundOrders(n int) error {
 func (r *repository) SeedPurchaseOrders(n int) error {
 
 	return nil
+}
+
+// Create a code generator func that return a unique alphabetic code (allcaps) of the specified length
+func newCodeGen(length int) func() string {
+	var newGenerator []int
+	for i := 0; i < length; i++ {
+		newGenerator = append(newGenerator, 65)
+	}
+	return func() string {
+		code := ""
+		for i := 0; i < len(newGenerator); i++ {
+			code = fmt.Sprintf("%c", newGenerator[i]) + code
+		}
+
+		for i, v := range newGenerator {
+			if v < 90 {
+				newGenerator[i] = v + 1
+				break
+			} else {
+				newGenerator[i] = 65
+			}
+		}
+
+		return code
+	}
 }
