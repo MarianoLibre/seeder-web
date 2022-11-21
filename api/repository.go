@@ -6,10 +6,21 @@ import (
 	"strings"
 )
 
-
 type Repository interface {
 	DropTables() error
 	CreateTables() error
+	SeedWarehouses(n int) error
+	SeedBuyers(n int) error
+	SeedSellers(n int) error
+	SeedEmployees(n int) error
+	SeedProducts(n int) error
+	SeedSections(n int) error
+	SeedLocalities(n int) error
+	SeedCarries(n int) error
+	SeedProductBatches(n int) error
+	SeedProductRecords(n int) error
+	SeedInboundOrders(n int) error
+	SeedPurchaseOrders(n int) error
 }
 
 type repository struct {
@@ -122,7 +133,6 @@ const (
 		order_status_id) VALUES (?, ?, ?, ?, ?, ?)`
 )
 
-
 func (r *repository) DropTables() error {
 	_, err := r.db.Exec(DROP_TABLES)
 	if err != nil {
@@ -152,63 +162,62 @@ func (r *repository) CreateTables() error {
 }
 
 // Seeders
-func SeedWarehouses(n int) error {
+func (r *repository) SeedWarehouses(n int) error {
 
 	return nil
 }
 
-func SeedBuyers(n int) error {
+func (r *repository) SeedBuyers(n int) error {
 
 	return nil
 }
 
-func SeedSellers(n int) error {
+func (r *repository) SeedSellers(n int) error {
 
 	return nil
 }
 
-func SeedEmployees(n int) error {
+func (r *repository) SeedEmployees(n int) error {
 
 	return nil
 }
 
-func SeedProducts(n int) error {
+func (r *repository) SeedProducts(n int) error {
 
 	return nil
 }
 
-func SeedSections(n int) error {
+func (r *repository) SeedSections(n int) error {
 
 	return nil
 }
 
-func SeedLocalities(n int) error {
+func (r *repository) SeedLocalities(n int) error {
 
 	return nil
 }
 
-func SeedCarries(n int) error {
+func (r *repository) SeedCarries(n int) error {
 
 	return nil
 }
 
-func SeedProductBatches(n int) error {
+func (r *repository) SeedProductBatches(n int) error {
 
 	return nil
 }
 
-func SeedProductOrders(n int) error {
+func (r *repository) SeedProductRecords(n int) error {
 
 	return nil
 }
 
-func SeedInboundOrders(n int) error {
+func (r *repository) SeedInboundOrders(n int) error {
 
 	return nil
 }
 
-func SeedPurchaseOrders(n int) error {
+func (r *repository) SeedPurchaseOrders(n int) error {
 
 	return nil
 }
-
