@@ -110,7 +110,7 @@ body {
   padding: 10px;
 }
 
-.showBtn {
+.showBtn, #help-btn {
   background-color: var(--black);
   color: var(--grey);
   border: 1px solid var(--grey);
@@ -120,24 +120,36 @@ body {
   bottom: 10px;
   right: 10px;
   transition: all 400ms;
+  cursor: pointer;
   min-width: 100px;
 }
-.showBtn:hover {
+.showBtn:hover, #help-btn:hover {
   filter: brightness(1.5);
   color: var(--white);
+}
+#help-btn {
+  right: 120px;
 }
 
 #root {
   height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: row;
+}
+
+#main {
+  height: 100%;
+  width: calc(100% - 360px);
 }
 
 #side-bar {
-  width: 240px;
+  width: 360px;
   height: 100%;
   border-right: 1px solid var(--grey);
   background-color: var(--blacker);
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
 #side-bar p {
@@ -157,8 +169,8 @@ body {
   border-bottom: 1px solid var(--grey);
   color: var(--white);
   height: 60px;
-  margin-bottom: 10px;
   font-size: 1em;
+  position: relative;
 }
 
 #mysql {
@@ -167,19 +179,34 @@ body {
 .fa-server {
   margin-right: 10px;
 }
-.fa-folder-o {
+.fa-folder-o, .fa-folder {
   margin-right: 20px;
+}
+
+.table-list {
+}
+li {
+  height: fit-content;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.9em;
 }
 
 header {
   height: 60px;
-  padding: 0px 24px;
+  padding-left: 24px;
   border-bottom: 1px solid var(--grey);
   background-color: var(--blacker);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+header p {
+  height: 100%;
+  line-height: 60px;
 }
 header p:last-of-type span:first-child {
   font-size: 14px;
@@ -209,7 +236,7 @@ header p:last-of-type span:first-child {
   background-color: var(--blue);
 }
 #refresh {
-  margin-left: 10px;
+  margin: 0px 12px;
   color: var(--grey);
   cursor: pointer;
 }
@@ -241,13 +268,137 @@ header p:last-of-type span:first-child {
 
 .table {
   color: var(--grey);
+  transition: all 200ms;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.table span {
   cursor: pointer;
-  transition: all 400ms;
 }
 .table:hover {
-  background-color: var(--black);
+  background-color: var(--black) !important;
   color: var(--white) !important;
 }
 .selected {
   color: var(--white) !important;
+}
+.greyedOut {
+  color: var(--black);
+}
+.fa-times-circle, .fa-times-circle-o {
+  color: var(--red);
+}
+.fa-check-circle {
+  color: var(--green);
+}
+.fa-question-circle {
+  color: var(--grey) !important;
+  opacity: 0.5;
+}
+.left, .right {
+}
+.seed-button {
+  border: none;
+  background-color: transparent;
+  color: var(--blue);
+  height: 28px;
+  width: 60px;
+  border-radius: 5px;
+  border: 1px solid var(--blue);
+  margin-right: 20px;
+  cursor: pointer;
+  transition: all 400ms;
+}
+.seed-button:hover {
+  background-color: var(--blue);
+  color: var(--whiter);
+}
+
+#section-header {
+  height: 60px;
+  border-bottom: 1px solid var(--grey);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#seed-all, #about {
+  height: 100%;
+  border: none;
+  width: 100px;
+  background-color: var(--magenta);
+  color: var(--whiter);
+  font-size: 1.1em;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 300ms;
+}
+#seed-all:hover {
+  opacity: 1;
+}
+
+#qty-form {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: var(--grey);
+}
+#quantity {
+  margin: 0px 16px;
+  width: 110px;
+  text-align: right;
+  background-color: var(--black);
+  border: none;
+  outline: none;
+  color: var(--white);
+  border: 1px solid var(--grey);
+  background-color: var(--blacker);
+  border-radius: 4px;
+  padding: 6px;
+}
+#quantity::placeholder {
+  font-style: italic;
+  text-align: left;
+  color: var(--grey);
+  opacity: 1;;
+}
+#about {
+  background-color: var(--blacker);
+  color: var(--green);
+  border-left: 1px solid var(--grey);
+  transition: all 300ms;
+}
+#about:hover {
+  color: var(--whiter);
+  background-color: var(--green);
+  font-weight: 500;
+}
+#view {
+  color: var(--grey);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: calc(100% - 60px);
+}
+.help-msg {
+  width: fit-content;
+  position: relative;
+  top: -50px;
+}
+.help-msg p {
+  padding: 14px;
+}
+.todo {
+  color: var(--white);
+  width: 50%;
+}
+.todo p {
+  margin: 0px auto 24px;
+}
+.cite {
+  padding: 32px;
+  color: var(--green);
+  border: 1px solid var(--green);
 }

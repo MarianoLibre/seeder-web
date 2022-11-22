@@ -97,17 +97,17 @@ const sideBar = document.getElementById("side-bar")
 
 const tableNames = [
   "buyers",
-  "carries",
-  "employees",
-  "inbound_orders",
-  "localhost",
-  "product_batches",
-  "product_records",
   "products",
-  "purchase_orders",
+  "employees",
   "sections",
   "sellers",
   "warehouses",
+  "localities",
+  "carries",
+  "product_batches",
+  "product_records",
+  "purchase_orders",
+  "inbound_orders",
 ]
 
 const tables = []
@@ -115,27 +115,82 @@ const tables = []
 const folderOutline = "fa-folder-o"
 const folderSolid = "fa-folder"
 
+const tableList = document.createElement("ul")
+tableList.setAttribute("class", "table-list")
+sideBar.appendChild(tableList)
 for (let item of tableNames) {
-  const newTable = document.createElement("p")
+  const newTable = document.createElement("li")
   newTable.className = "table"
   newTable.setAttribute("id", item)
+
   const icon = document.createElement("i")
   icon.classList = `fa ${folderOutline} fa-lg`
-  icon.onclick = e => e.stopPropagation()
+
   const text = document.createElement("span")
   text.innerText = item
-  text.onclick = e => e.stopPropagation()
-  newTable.appendChild(icon)
-  newTable.appendChild(text)
-  newTable.onclick = selectTable
+  text.onclick = selectTable
+  
+  const checked = document.createElement("i")
+  checked.classList = `fa fa-lg fa-question-circle`
+
+  const seedBtn = document.createElement("button")
+  seedBtn.className = "seed-button"
+  seedBtn.innerText = "Seed"
+
+  const containerLeft = document.createElement("span")
+  containerLeft.className = "left"
+  containerLeft.appendChild(icon)
+  containerLeft.appendChild(text)
+
+  const containerRight = document.createElement("span")
+  containerRight.className = "right"
+  containerRight.appendChild(seedBtn)
+  containerRight.appendChild(checked)
+
+  newTable.appendChild(containerLeft)
+  newTable.appendChild(containerRight)
+
   tables.push(newTable)
-  sideBar.appendChild(newTable)
+  tableList.appendChild(newTable)
 }
 
-function selectTable(e) {
+const view = document.getElementById("view")
+const initialMsg = `<div class="help-msg">
+<p>Click "Seed all" to seed all tables.</p>
+<p>Enter a number to override the default value (10)</p>
+<p>Click on the <i class="fa fa-refresh"></i> icon to verify your connection.</p>
+<p>Click on a table for details on that table.</p>
+<p>You can seed each table individually by clicking on its "seed" button.</p>
+<p>To show this message again click on the "Help" button.</p>
+</div>`
+
+view.innerHTML = initialMsg
+
+const helpBtn = document.getElementById("help-btn")
+helpBtn.onclick = () => {
+  view.innerHTML = initialMsg
+}
+
+async function selectTable(e) {
   for (let t of tables) {
-    t.firstChild.classList = `fa ${folderOutline} fa-lg`
-    t.classList = "table"
+    if (t.id === e.target.innerText) {
+      t.children[0].children[0].classList = `fa fa-lg ${folderSolid}`
+      t.classList = "table selected"
+      view.innerHTML = `<i class="fa fa-circle-o-notch fa-spin bluefg fa-2x"></i>`
+      const chuckNorris = await fetch("https://api.chucknorris.io/jokes/random")
+      const joke = await chuckNorris.json()
+      view.innerHTML = `
+        <div class="todo">
+          <p><b>TODO: </b>${t.id}</p>
+          <p>What did you expect? I only have two hands!</p>
+          <p>Allright, I'll give you something in exchange...<br/>
+          Here you have some <b>Chuck Norris</b> facts...</p>
+          <p>(And for "facts" I mean jokes!)</p>
+          <p class="cite">${joke.value}</p>
+        </div>`
+    } else {
+      t.children[0].children[0].classList = `fa fa-lg ${folderOutline}`
+      t.classList = "table"
+    }
   }
-  console.log(e.target.innerHTML)
 }

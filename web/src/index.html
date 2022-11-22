@@ -12,12 +12,13 @@
   <body>
     <header>
       <p>
-        Melisprint seeder <span class="by">by &lt;mec /&gt;</span>
+        Melisprint seeder <span class="by">by &lt;mariano /&gt;</span>
       </p>
       <p>
       <span><i class="fa fa-server fa-lg"></i>localhost:8080/</span>
       <span id="status" class="statusPre">Check server</span>
       <span class="fa fa-refresh fa-lg" id="refresh"></span>
+      <button id="about">about</button>
       </p>
     </header>
     <div id="root">
@@ -28,6 +29,18 @@
           <i class="fa fa-mysql fa-lg" id="mysql"></i>
         </p>
       </aside>
+      <section id="main">
+        <div id="section-header">
+          <form id="qty-form">
+            <label for="quantity">How many:</label>
+            <input type="text" id="quantity" name="quantity" placeholder="enter a number"/>
+            (default: 10)
+          </form>
+          <button id="seed-all">Seed all</button>
+        </div>
+        <div id="view"></div>
+      </section>
     </div>
+    <button id="help-btn">Help</button>
   </body>
 </html>
