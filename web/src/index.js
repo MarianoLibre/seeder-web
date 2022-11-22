@@ -40,13 +40,14 @@ showColorBtn.onclick = toggleColors
 
 
 // Connect to Server
-const refreshBtn = document.getElementById("refresh")
+const refreshIcon = document.getElementById("refresh")
+const refreshBtn = document.getElementById("status")
+refreshIcon.onclick = connect
 refreshBtn.onclick = connect
 
 async function connect() {
-  refreshBtn.style.animation = "spin 1s linear infinite"
-  setTimeout(() => refreshBtn.style.animation = "none", 1000)
-  const statusBtn = document.getElementById("status")
+  refreshIcon.style.animation = "spin 1s linear infinite"
+  setTimeout(() => refreshIcon.style.animation = "none", 1000)
   try {
     const url = new URL("http://localhost:8080/")
     const server = await fetch(url, {
@@ -56,11 +57,11 @@ async function connect() {
         cors: "no-cors",
       },
     })
-    statusBtn.setAttribute("class", "statusUp")
-    statusBtn.innerText = "Server is UP"
+    refreshBtn.setAttribute("class", "statusUp")
+    refreshBtn.innerText = "Server is UP"
   } catch (e) {
-    statusBtn.setAttribute("class", "statusDown")
-    statusBtn.innerText = "Server is DOWN"
+    refreshBtn.setAttribute("class", "statusDown")
+    refreshBtn.innerText = "Server is DOWN"
   }
 }
 
@@ -96,18 +97,18 @@ btn.onclick = async function () {
 const sideBar = document.getElementById("side-bar")
 
 const tableNames = [
-  "buyers",
-  "products",
-  "employees",
-  "sections",
-  "sellers",
-  "warehouses",
   "localities",
   "carries",
+  "warehouses",
+  "buyers",
+  "employees",
+  "sellers",
+  "sections",
+  "products",
   "product_batches",
+  "inbound_orders",
   "product_records",
   "purchase_orders",
-  "inbound_orders",
 ]
 
 const tables = []
@@ -136,6 +137,7 @@ for (let item of tableNames) {
   const seedBtn = document.createElement("button")
   seedBtn.className = "seed-button"
   seedBtn.innerText = "Seed"
+  seedBtn.onclick = () => seedTable(item)
 
   const containerLeft = document.createElement("span")
   containerLeft.className = "left"
@@ -193,4 +195,116 @@ async function selectTable(e) {
       t.classList = "table"
     }
   }
+}
+
+const dropBtn = document.getElementById("drop-tables")
+dropBtn.onclick = dropTables
+const createBtn = document.getElementById("create-tables")
+createBtn.onclick = createTables
+
+async function dropTables() {
+  view.innerHTML = `<i class="fa fa-circle-o-notch fa-spin bluefg fa-2x"></i>`
+  const result = await fetch("http://localhost:8080/seeder/drop-tables", {
+    method: "POST",
+  })
+  const msg = await result.json()
+  view.innerHTML = msg.message
+}
+
+async function createTables() {
+  view.innerHTML = `<i class="fa fa-circle-o-notch fa-spin bluefg fa-2x"></i>`
+  const result = await fetch("http://localhost:8080/seeder/create-tables", {
+    method: "POST",
+  })
+  const msg = await result.json()
+  view.innerHTML = msg.message
+}
+
+async function seedTable(table) {
+  const quantity = document.getElementById("quantity").value
+  if (isNaN(Number(quantity))) {
+    quantity = 10
+  }
+  const route = table.replace("_", "-")
+
+  view.innerHTML = `<i class="fa fa-circle-o-notch fa-spin bluefg fa-2x"></i>`
+  const result = await fetch(`http://localhost:8080/seeder/${route}?qty=${quantity}`, {
+    method: "POST",
+  })
+  const msg = await result.text()
+  view.innerHTML = msg
+  for (let t of tables) {
+    if (t.id == table) {
+      t.children[1].children[1].classList = `fa fa-lg fa-check-circle`
+    }
+  }
+
+  return result.status
+}
+
+const seedAllBtn = document.getElementById("seed-all")
+seedAllBtn.onclick = seedAll
+
+async function seedAll() {
+  const localities = await seedTable("localities")
+  if (localities != 201) {
+    view.innerText = "Something went wrong: localities"
+    return
+  }
+  const carries = await seedTable("carries")
+  if (carries != 201) {
+    view.innerText = "Something went wrong: carries"
+    return
+  }
+  const warehouses = await seedTable("warehouses")
+  if (warehouses != 201) {
+    view.innerText = "Something went wrong: warehouses"
+    return
+  }
+  const buyers = await seedTable("buyers")
+  if (buyers != 201) {
+    view.innerText = "Something went wrong: buyers"
+    return
+  }
+  const employees = await seedTable("employees")
+  if (employees != 201) {
+    view.innerText = "Something went wrong: employees"
+    return
+  }
+  const sellers = await seedTable("sellers")
+  if (sellers != 201) {
+    view.innerText = "Something went wrong: sellers"
+    return
+  }
+  const sections = await seedTable("sections")
+  if (sections != 201) {
+    view.innerText = "Something went wrong: sections"
+    return
+  }
+  const products = await seedTable("products")
+  if (products != 201) {
+    view.innerText = "Something went wrong: products"
+    return
+  }
+  const product_batches = await seedTable("product_batches")
+  if (product_batches != 201) {
+    view.innerText = "Something went wrong: product_batches"
+    return
+  }
+  const inbound_orders = await seedTable("inbound_orders")
+  if (inbound_orders != 201) {
+    view.innerText = "Something went wrong: inbound_orders"
+    return
+  }
+  const product_records = await seedTable("product_records")
+  if (product_records != 201) {
+    view.innerText = "Something went wrong: product_records"
+    return
+  }
+  const purchase_orders = await seedTable("purchase_orders")
+  if (purchase_orders != 201) {
+    view.innerText = "Something went wrong: purchase_orders"
+    return
+  }
+  view.innerHTML = `<h3>All tables successfully seeded</h3>`
 }

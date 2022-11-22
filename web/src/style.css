@@ -222,6 +222,7 @@ header p:last-of-type span:first-child {
   font-size: 14px;
   margin-left: 10px;
   transition: all 400ms;
+  cursor: pointer;
 }
 .statusDown {
   color: var(--whiter);
@@ -232,8 +233,9 @@ header p:last-of-type span:first-child {
   background-color: var(--green);
 }
 .statusPre {
-  color: var(--whiter);
-  background-color: var(--blue);
+  color: var(--blue);
+  background-color: transparent;
+  border: 1px solid var(--blue);
 }
 #refresh {
   margin: 0px 12px;
@@ -401,4 +403,31 @@ header p:last-of-type span:first-child {
   padding: 32px;
   color: var(--green);
   border: 1px solid var(--green);
+}
+.reset {
+	border: none;
+	width: 120px;
+	height: 32px;
+	border-radius: 5px;
+	background-color: transparent;
+	transition: all 400ms;
+	cursor: pointer;
+}
+#drop-tables {
+	color: var(--red);
+	border: 1px solid var(--red);
+	margin-right: 14px;
+}
+#drop-tables:hover {
+	color: var(--whiter);
+	background-color: var(--red);
+}
+#create-tables {
+	color: var(--green);
+	border: 1px solid var(--green);
+	margin-right: 44px;
+}
+#create-tables:hover {
+	color: var(--whiter);
+	background-color: var(--green);
 }
