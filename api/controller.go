@@ -31,7 +31,7 @@ func (s *Seeder) Drop() gin.HandlerFunc {
 			return
 		}
 		ctx.JSON(http.StatusOK, gin.H{
-			"code": http.StatusOK,
+			"code":    http.StatusOK,
 			"message": "All tables have been dropped",
 		})
 	}
@@ -45,7 +45,7 @@ func (s *Seeder) Create() gin.HandlerFunc {
 			return
 		}
 		ctx.JSON(http.StatusOK, gin.H{
-			"code": http.StatusOK,
+			"code":    http.StatusOK,
 			"message": "All tables have been created",
 		})
 		return
@@ -68,7 +68,7 @@ func (s *Seeder) SeedWarehouses() gin.HandlerFunc {
 
 		err = s.repository.SeedWarehouses(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[warehouses]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[warehouses]"+err.Error())
 			return
 		}
 
@@ -91,7 +91,7 @@ func (s *Seeder) SeedBuyers() gin.HandlerFunc {
 
 		err = s.repository.SeedBuyers(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[buyers]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[buyers]"+err.Error())
 			return
 		}
 
@@ -115,7 +115,7 @@ func (s *Seeder) SeedSellers() gin.HandlerFunc {
 
 		err = s.repository.SeedSellers(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[sellers]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[sellers]"+err.Error())
 			return
 		}
 
@@ -139,7 +139,7 @@ func (s *Seeder) SeedEmployees() gin.HandlerFunc {
 
 		err = s.repository.SeedEmployees(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[employees]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[employees]"+err.Error())
 			return
 		}
 
@@ -163,7 +163,7 @@ func (s *Seeder) SeedProducts() gin.HandlerFunc {
 
 		err = s.repository.SeedProducts(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[products]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[products]"+err.Error())
 			return
 		}
 
@@ -187,7 +187,7 @@ func (s *Seeder) SeedSections() gin.HandlerFunc {
 
 		err = s.repository.SeedSections(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[sections]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[sections]"+err.Error())
 			return
 		}
 
@@ -211,7 +211,7 @@ func (s *Seeder) SeedLocalities() gin.HandlerFunc {
 
 		err = s.repository.SeedLocalities(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[localities]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[localities]"+err.Error())
 			return
 		}
 
@@ -235,7 +235,7 @@ func (s *Seeder) SeedCarries() gin.HandlerFunc {
 
 		err = s.repository.SeedCarries(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[carries]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[carries]"+err.Error())
 			return
 		}
 
@@ -259,7 +259,7 @@ func (s *Seeder) SeedProductBatches() gin.HandlerFunc {
 
 		err = s.repository.SeedProductBatches(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[product_batches]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[product_batches]"+err.Error())
 			return
 		}
 
@@ -283,7 +283,7 @@ func (s *Seeder) SeedProductRecords() gin.HandlerFunc {
 
 		err = s.repository.SeedProductRecords(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[product_records]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[product_records]"+err.Error())
 			return
 		}
 
@@ -307,7 +307,7 @@ func (s *Seeder) SeedInboundOrders() gin.HandlerFunc {
 
 		err = s.repository.SeedInboundOrders(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[inbound_orders]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[inbound_orders]"+err.Error())
 			return
 		}
 
@@ -331,7 +331,7 @@ func (s *Seeder) SeedPurchaseOrders() gin.HandlerFunc {
 
 		err = s.repository.SeedPurchaseOrders(int(n))
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "[purchase_orders]" + err.Error())
+			ctx.JSON(http.StatusInternalServerError, "[purchase_orders]"+err.Error())
 			return
 		}
 
